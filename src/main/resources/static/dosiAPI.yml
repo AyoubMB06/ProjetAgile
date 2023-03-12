@@ -1,0 +1,2348 @@
+openapi: 3.0.0
+x-stoplight:
+  id: kclh6ucmj02zt
+info:
+  title: dosiAPI
+  version: '1.0'
+  description: L'api de dosiAPI
+  contact:
+    name: Younesse EL MANSOURI
+    email: younesse.elmansouri@umr5.ac.ma
+    url: 'http://unes.me'
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+servers:
+  - url: 'http://localhost:8080'
+    description: YOUNESSE EL MANSOURI
+tags:
+  - name: Authentification
+  - name: Candidats
+  - name: Domaine
+  - name: EC
+  - name: Enseignants
+  - name: Etudiants
+  - name: Formations
+  - name: Promotions
+  - name: UE
+paths:
+  /enseignants:
+    get:
+      summary: Récupérer la liste des enseignants
+      description: Cette opération permet de récupérer les enseignants
+      tags:
+        - Enseignants
+      responses:
+        '200':
+          $ref: '#/components/responses/getEnseignants200Response'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEnseignants
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+    post:
+      summary: Créer un enseignant
+      operationId: createEnseignant
+      tags:
+        - Enseignants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pEnseignant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pEnseignant'
+      description: Cette opération permet de créér un enseignant.
+      parameters: []
+  '/enseignants/{no_enseignant}':
+    parameters:
+      - $ref: '#/components/parameters/no_enseignant'
+    get:
+      summary: Récupérer un enseignant
+      description: Cette opération permet de récupérer un enseignant.
+      tags:
+        - Enseignants
+      responses:
+        '200':
+          $ref: '#/components/responses/getEnseignant200Response'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEnseignant
+      parameters: []
+    patch:
+      summary: Modifier un enseignant
+      operationId: updateEnseignant
+      tags:
+        - Enseignants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pEnseignant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de modifier un enseignant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pEnseignant'
+        description: ''
+    delete:
+      summary: Supprimer un enseignant
+      operationId: deleteEnseignant
+      tags:
+        - Enseignants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  no_enseignant:
+                    type: integer
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer un enseignant.
+  /promotions:
+    get:
+      summary: Récupérer la liste des promotions
+      tags:
+        - Promotions
+      operationId: getPromotions
+      description: Cette operation permet de récupérer la liste des promotions.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          $ref: '#/components/responses/get200PromotionsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+    post:
+      summary: Créer une promotion
+      operationId: createPromotion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xPromotion'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créér une promotion.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xPromotion'
+      tags:
+        - Promotions
+    parameters: []
+  '/promotions/{code_formation}/{annee_universitaire}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/annee_universitaire'
+    get:
+      summary: Lister les détails  d'une promotion
+      tags:
+        - Promotions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xPromotion'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getPromotion
+      description: Cette opération permet de récupérer les details d'une promotion.
+    delete:
+      summary: Supprimer une promotion
+      operationId: deletePromotion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code_formation:
+                    type: string
+                    maxLength: 8
+                  annee_universitaire:
+                    type: string
+                    maxLength: 10
+                    pattern: '^(?:\d{4})-(?:\d{4})$'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer une promotion vierge.
+      tags:
+        - Promotions
+  '/promotions/{code_formation}/{annee_universitaire}/candidats':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/annee_universitaire'
+    get:
+      summary: Lister les candidats d'une promotion
+      responses:
+        '200':
+          $ref: '#/components/responses/get200CandidatsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getCandidatsPromo
+      description: Cette opération permet de récupérer la liste des candidats d'une promotion.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      tags:
+        - Promotions
+  '/promotions/{code_formation}/{annee_universitaire}/candidats/{no_candidat}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/annee_universitaire'
+      - $ref: '#/components/parameters/no_candidat'
+    get:
+      summary: Lister les détails d'un candidat
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oCandidat'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getCandidat
+      description: Cette opération permet de récupérer les details d'un candidat.
+      tags:
+        - Promotions
+  '/promotions/{code_formation}/{annee_universitaire}/etudiants':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/annee_universitaire'
+    get:
+      summary: Lister les étudiants d'une promotion
+      responses:
+        '200':
+          $ref: '#/components/responses/getEtudiants200tReponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEtudiantsPromo
+      description: Cette opération permet de récupérer la liste des étudiants d'une promotion.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      tags:
+        - Promotions
+  '/promotions/{code_formation}/{annee_universitaire}/etudiants/{no_etudiant}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/annee_universitaire'
+      - $ref: '#/components/parameters/no_etudiant'
+    get:
+      summary: Lister les détails d'un étudiant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oEtudiant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEtudiant
+      description: Cette opération permet de récupérer les details d'un étudiant.
+      tags:
+        - Promotions
+  /formations:
+    get:
+      summary: Récupérer les formations
+      responses:
+        '200':
+          $ref: '#/components/responses/get200FormationsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getFormations
+      description: Cette opération permet de récupérer la liste des formations
+      tags:
+        - Formations
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+    post:
+      summary: Créer une formation
+      operationId: creerFormation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xFormation'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créer une formation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xFormation'
+      tags:
+        - Formations
+    parameters: []
+  '/formations/{code_formation}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+    get:
+      summary: Récupérer une formation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xFormation'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '402':
+          description: Payment Required
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getFormation
+      description: Cette opération permet de récupérer une formation.
+      tags:
+        - Formations
+    delete:
+      summary: Supprimer une formation vierge
+      operationId: deleteFormationVierge
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code_formation:
+                    type: string
+        '400':
+          description: Bad Request
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer une formation vierge.
+      tags:
+        - Formations
+  '/formations/{code_formation}/ue':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+    get:
+      summary: Récupérer les unités d'enseignement
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/xUniteEnseignement'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getUEsOfFormation
+      description: Cette opération permet de récupérer les unités d'enseignement pour une formation.
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+      tags:
+        - Formations
+  '/formations/{code_formation}/ue/{code_ue}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/code_ue'
+    get:
+      summary: Récupérer une unité d'enseignement
+      operationId: getUEFormation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xUniteEnseignement'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de récupérer une unité d'enseignement dans une formation.
+      tags:
+        - Formations
+  /ecs:
+    parameters: []
+    get:
+      summary: Récupérer les éléments constitutifs
+      responses:
+        '200':
+          $ref: '#/components/responses/get200ECsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getECs
+      description: Cette opération permet de récupérer tous les éléments constitutifs.
+      tags:
+        - EC
+      parameters:
+        - $ref: '#/components/parameters/formation'
+        - $ref: '#/components/parameters/ue'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+    post:
+      summary: Créer un élément constitutif
+      operationId: createEC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xElementConstitutif'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créer un élément constitutif.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xElementConstitutif'
+        description: ''
+      tags:
+        - EC
+  '/ecs/{code_formation}/{code_ue}/{code_ec}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/code_ue'
+      - $ref: '#/components/parameters/code_ec'
+    get:
+      summary: Récupérer un EC
+      tags:
+        - EC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xElementConstitutif'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEC
+      description: Cette opération permet de récupérer un élément constitutif.
+      parameters: []
+    patch:
+      summary: Modifier un EC
+      operationId: updateEC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xElementConstitutif'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de modifier un élément constitutif.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xElementConstitutif'
+      tags:
+        - EC
+    delete:
+      summary: Supprimer un EC
+      operationId: deleteEC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code_formation:
+                    type: string
+                    x-stoplight:
+                      id: m9wldu64jusgb
+                  code_ue:
+                    type: string
+                    x-stoplight:
+                      id: g9r0h0q04wk6k
+                  code_ec:
+                    type: string
+                    x-stoplight:
+                      id: tm2t2e8ii29r4
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer un élément constituf.
+      tags:
+        - EC
+  '/formations/{code_formation}/ue/{code_ue}/ec':
+    get:
+      summary: Récupérer les ECs d'une formation
+      responses:
+        '200':
+          $ref: '#/components/responses/get200ECsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getECsByFormAndUE
+      description: Cette opération permet de récupérer les éléments constitutifs d'une unité d'enseignement dans une formation.
+      parameters: []
+      tags:
+        - Formations
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/code_ue'
+  '/formations/{code_formation}/ue/{code_ue}/ec/{code_ec}':
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/code_ue'
+      - $ref: '#/components/parameters/code_ec'
+    get:
+      summary: Récupérer un élément constitutif
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xElementConstitutif'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getECBack
+      description: Cette opération permet de récupérer un élément constitutif d'une unité d'enseignement dans une formation.
+      tags:
+        - Formations
+  /auth/connexion:
+    post:
+      summary: s'authentifier
+      operationId: getToken
+      responses:
+        '200':
+          $ref: '#/components/responses/hasToken200Response'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+      description: Cette opération permet de s'authentifier et avoir un token.
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xLogin'
+            examples:
+              ENS:
+                value:
+                  utilisateur: philippe.saliou@univ-brest.fr
+                  mot_de_passe: dosi
+              ADM:
+                value:
+                  utilisateur: Administrateur
+                  mot_de_passe: dosi
+        description: ''
+      tags:
+        - Authentification
+    parameters: []
+  /auth/deconnexion:
+    get:
+      summary: Se déconnecter
+      operationId: logout
+      responses:
+        '200':
+          $ref: '#/components/responses/hasLoggedOutResponse'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+      description: Cette opération permet de se déconnecter (invalider le token).
+      tags:
+        - Authentification
+    parameters: []
+  /domains:
+    get:
+      summary: Récupérer la liste des domaines
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/domainList'
+      operationId: getDomains
+      parameters:
+        - $ref: '#/components/parameters/name'
+      description: 'Cette opération permet de récupérer les domains '
+      tags:
+        - Domaine
+      security: []
+  /etudiants:
+    get:
+      summary: Récupérer les étudiants
+      tags:
+        - Etudiants
+      responses:
+        '200':
+          $ref: '#/components/responses/getEtudiants200tReponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEtudiants
+      description: Cette opération permet de récupérer les étudiants
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/formation'
+        - $ref: '#/components/parameters/anne_univ'
+    post:
+      summary: Créer un étudiant
+      operationId: creerEtudiant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pEtudiant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créer un étudiant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pEtudiant'
+      tags:
+        - Etudiants
+    parameters: []
+  /ues:
+    get:
+      summary: Récupérer les unités d’enseignements
+      tags:
+        - UE
+      responses:
+        '200':
+          $ref: '#/components/responses/get200UEsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getUEs
+      description: Cette opération permet de récupérer les unités d'enseignements
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/formation'
+    post:
+      summary: Créer une UE
+      operationId: createUE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xUniteEnseignement'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créer une ue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xUniteEnseignement'
+      tags:
+        - UE
+  '/ues/{code_formation}/{code_ue}':
+    get:
+      summary: Récupérer une unité d'enseignement
+      tags:
+        - UE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xUniteEnseignement'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getUE
+      description: Cette opération permet de récupérer une unité d'enseignements
+      parameters: []
+    patch:
+      summary: Modifier une UE
+      operationId: updateUE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/xUniteEnseignement'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de modifier une ue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/xUniteEnseignement'
+      tags:
+        - UE
+    delete:
+      summary: Supprimer une UE
+      operationId: deleteUE
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code_formation:
+                    type: string
+                    x-stoplight:
+                      id: 6kkflthc0bqq9
+                  code_ue:
+                    type: string
+                    x-stoplight:
+                      id: n2kmodkb9temh
+        '400':
+          description: Bad Request
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer une UE.
+      tags:
+        - UE
+    parameters:
+      - $ref: '#/components/parameters/code_formation'
+      - $ref: '#/components/parameters/code_ue'
+  /candidats:
+    get:
+      summary: Récupérer  les candidats
+      tags:
+        - Candidats
+      responses:
+        '200':
+          $ref: '#/components/responses/get200CandidatsResponse'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getCandidats
+      description: Cette opération permet de récupérer les candidats
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/size'
+        - $ref: '#/components/parameters/formation'
+        - $ref: '#/components/parameters/anne_univ'
+    post:
+      summary: Créer Candidat
+      operationId: creerCandidat
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pCandidat'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de créer un candidat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pCandidat'
+      tags:
+        - Candidats
+      parameters: []
+    parameters: []
+  '/candidats/{no_candidat}':
+    parameters:
+      - $ref: '#/components/parameters/no_candidat'
+    get:
+      summary: Récupérer un candidat
+      tags:
+        - Candidats
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pCandidat'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getCandidatsById
+      description: Cette opération permet de récupérer un candidat
+    patch:
+      summary: ''
+      operationId: updateCandidat
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pCandidat'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de modifier un candidat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pCandidat'
+      tags:
+        - Candidats
+    delete:
+      summary: ''
+      operationId: deleteCandidat
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  no_candidat:
+                    type: string
+                    x-stoplight:
+                      id: eyy7jz37bbmb9
+      description: Cette opération permet de supprimer un candidat
+      tags:
+        - Candidats
+  '/etudiants/{no_etudiant}':
+    parameters:
+      - $ref: '#/components/parameters/no_etudiant'
+    get:
+      summary: Récupérer unn étudiant
+      tags:
+        - Etudiants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pEtudiant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      operationId: getEtudiantById
+      description: Cette opération permet de récupérer un etudiant
+    patch:
+      summary: ''
+      operationId: updateEtudiant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pEtudiant'
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de modifier un étudiant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pEtudiant'
+      tags:
+        - Etudiants
+    delete:
+      summary: ''
+      operationId: deleteEtudiant
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  no_etudiant:
+                    type: string
+                    x-stoplight:
+                      id: qam3gqsje94s5
+        '400':
+          $ref: '#/components/responses/notOkay400Response'
+        '401':
+          $ref: '#/components/responses/notOkay401Response'
+        '403':
+          $ref: '#/components/responses/notOkay403Response'
+        '404':
+          $ref: '#/components/responses/notOkay404Response'
+        '500':
+          $ref: '#/components/responses/notOkay500Response'
+      description: Cette opération permet de supprimer un étudiant
+      tags:
+        - Etudiants
+components:
+  schemas:
+    pEtudiant:
+      title: pEtudiant
+      x-stoplight:
+        id: cedce0ed33f80
+      type: object
+      x-examples:
+        Example 1:
+          no_etudiant: '10000001'
+          nom: EL MANSOURI
+          prenom: Younesse
+          sexe: M
+          lieu_naissance: Tanger
+          nationalite: Marocaine
+          code_formation: M2DOSI
+          annee_universitaire: 2022-2023
+          date_naissance: 26-02-1998
+      x-internal: false
+      properties:
+        no_etudiant:
+          type: string
+          maxLength: 50
+        code_formation:
+          type: string
+          maxLength: 8
+        annee_universitaire:
+          type: string
+          pattern: '^(?:\d{4})-(?:\d{4})$'
+          maxLength: 10
+        nom:
+          type: string
+          maxLength: 50
+        prenom:
+          type: string
+          maxLength: 50
+        sexe:
+          type: string
+          maxLength: 1
+        lieu_naissance:
+          type: string
+          maxLength: 255
+        nationalite:
+          type: string
+          maxLength: 50
+          default: Francaise
+        date_naissance:
+          type: string
+          format: date
+        telephone:
+          type: string
+          maxLength: 20
+        mobile:
+          type: string
+          maxLength: 20
+        email:
+          type: string
+          maxLength: 255
+          format: email
+        email_ubo:
+          type: string
+          maxLength: 255
+          format: email
+        adresse:
+          type: string
+          maxLength: 255
+        code_postal:
+          type: string
+          maxLength: 10
+        ville:
+          type: string
+          maxLength: 255
+        pays_origine:
+          type: string
+          maxLength: 5
+          minLength: 1
+        universite_origine:
+          type: string
+          maxLength: 6
+        groupe_tp:
+          type: number
+        groupe_anglais:
+          type: number
+      required:
+        - no_etudiant
+        - code_formation
+        - annee_universitaire
+        - nom
+        - prenom
+        - sexe
+        - lieu_naissance
+        - nationalite
+        - date_naissance
+        - email
+        - email_ubo
+        - adresse
+        - ville
+        - pays_origine
+        - universite_origine
+    gEtudiant:
+      title: gEtudiant
+      type: object
+      x-examples:
+        Example 1:
+          no_etudiant: '10000001'
+          nom: EL MANSOURI
+          prenom: Younesse
+          sexe: M
+          lieu_naissance: Tanger
+          nationalite: Marocaine
+          code_formation: M2DOSI
+          annee_universitaire: 2022-2023
+          date_naissance: 26-02-1998
+      x-internal: false
+      x-stoplight:
+        id: 8b811ab421912
+      properties:
+        no_etudiant:
+          type: string
+          maxLength: 50
+        code_formation:
+          type: string
+          maxLength: 8
+        annee_universitaire:
+          type: string
+          pattern: '^(?:\d{4})-(?:\d{4})$'
+          maxLength: 10
+        nom:
+          type: string
+          maxLength: 50
+        prenom:
+          type: string
+          maxLength: 50
+        sexe:
+          type: string
+          maxLength: 1
+        date_naissance:
+          type: string
+          format: date
+        email_ubo:
+          type: string
+          maxLength: 255
+          format: email
+      required:
+        - no_etudiant
+        - code_formation
+        - annee_universitaire
+        - nom
+        - prenom
+        - sexe
+        - date_naissance
+        - email_ubo
+    oEtudiant:
+      title: oEtudiant
+      x-stoplight:
+        id: g10fc8zd4tkl0
+      oneOf:
+        - $ref: '#/components/schemas/pEtudiant'
+        - $ref: '#/components/schemas/gEtudiant'
+    listEtudiants:
+      title: listEtudiants
+      x-stoplight:
+        id: 3n8e2avt5qhxx
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/oEtudiant'
+    pEnseignant:
+      title: pEnseignant
+      x-stoplight:
+        id: 32e5d01d9f0f9
+      type: object
+      description: La structure d'un engseignant privé (bd)
+      x-examples:
+        Enseignant privé (bd):
+          no_enseignant: 1
+          type: MCF
+          sexe: H
+          nom: SALIOU
+          prenom: Philippe
+          adresse: Addresse 1
+          code_postal: '29200'
+          ville: Brest
+          pays: France
+          mobile: 06.01.02.03.04
+          telephone: 06.04.03.02.01
+          email_ubo: ubo@mail.com
+          email_perso: perso@mail.com
+      properties:
+        no_enseignant:
+          type: integer
+          maximum: 100000
+          exclusiveMaximum: true
+          minimum: 0
+          exclusiveMinimum: true
+        type:
+          type: string
+          minLength: 1
+          maxLength: 5
+        sexe:
+          type: string
+          minLength: 1
+          maxLength: 1
+          example: H
+        nom:
+          type: string
+          maxLength: 50
+          minLength: 1
+        prenom:
+          type: string
+          minLength: 1
+          maxLength: 50
+        adresse:
+          type: string
+        code_postal:
+          type: string
+          minLength: 1
+          maxLength: 10
+        ville:
+          type: string
+          maxLength: 255
+        pays:
+          type: string
+          minLength: 1
+          maxLength: 5
+        mobile:
+          type: string
+          minLength: 2
+          maxLength: 20
+        telephone:
+          type: string
+          minLength: 2
+          maxLength: 20
+        email_ubo:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 255
+        email_perso:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 255
+      required:
+        - no_enseignant
+        - type
+        - sexe
+        - nom
+        - prenom
+        - adresse
+        - code_postal
+        - ville
+        - pays
+        - mobile
+        - telephone
+        - email_ubo
+        - email_perso
+    gEnseignant:
+      title: gEnseignant
+      x-stoplight:
+        id: jazbyywolvmu7
+      type: object
+      x-examples:
+        ' Enseignant public':
+          no_enseignant: 1
+          nom: SALIOU
+          prenom: Philippe
+          email_ubo: ubo@mail.com
+      description: La structure d'un enseignant public
+      properties:
+        no_enseignant:
+          type: integer
+        nom:
+          type: string
+        prenom:
+          type: string
+        email_ubo:
+          type: string
+    oEnseignant:
+      title: oEnseignant
+      x-stoplight:
+        id: cd7dd68328ba3
+      oneOf:
+        - $ref: '#/components/schemas/pEnseignant'
+        - $ref: '#/components/schemas/gEnseignant'
+      description: La structure d'un enseignant de sortie (public / privé)
+      x-examples:
+        Enseignant privé:
+          no_enseignant: 1
+          type: MCF
+          sexe: H
+          nom: SALIOU
+          prenom: Philippe
+          adresse: Addresse 1
+          code_postal: '29200'
+          ville: Brest
+          pays: France
+          mobile: 06.01.02.03.04
+          telephone: 06.04.03.02.01
+          email_ubo: ubo@mail.com
+          email_perso: perso@mail.com
+        Enseignant public:
+          no_enseignant: 1
+          nom: SALIOU
+          prenom: Philippe
+          email_ubo: ubo@mail.com
+    listEnseignants:
+      title: listEnseignants
+      x-stoplight:
+        id: e8b380de37cb5
+      type: object
+      x-examples:
+        Liste privé:
+          total: 1
+          data:
+            - no_enseignant: 1
+              type: MCF
+              sexe: H
+              nom: SALIOU
+              prenom: Philippe
+              adresse: Addresse 1
+              code_postal: '29200'
+              ville: Brest
+              pays: France
+              mobile: 06.01.02.03.04
+              telephone: 06.04.03.02.01
+              email_ubo: ubo@mail.com
+              email_perso: perso@mail.com
+        Liste publique:
+          total: 1
+          data:
+            - no_enseignant: 1
+              nom: SALIOU
+              prenom: Philippe
+              email_ubo: ubo@mail.com
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/oEnseignant'
+      description: La liste des enseignants en sortie (public / privé)
+    pCandidat:
+      title: pCandidat
+      type: object
+      x-examples: {}
+      x-stoplight:
+        id: 58dcc6514c58dcc6514c956
+      properties:
+        no_candidat:
+          type: string
+          maxLength: 50
+        code_formation:
+          type: string
+          maxLength: 8
+        annee_universitaire:
+          type: string
+          pattern: '^(?:\d{4})-(?:\d{4})$'
+          maxLength: 10
+        nom:
+          type: string
+          maxLength: 50
+        prenom:
+          type: string
+          maxLength: 50
+        sexe:
+          type: string
+          maxLength: 1
+        lieu_naissance:
+          type: string
+          maxLength: 255
+        nationalite:
+          type: string
+          maxLength: 50
+          default: Francaise
+        date_naissance:
+          type: string
+          format: date
+        telephone:
+          type: string
+          maxLength: 20
+        mobile:
+          type: string
+          maxLength: 20
+        email:
+          type: string
+          maxLength: 255
+          format: email
+        liste_selection:
+          type: string
+          maxLength: 6
+        adresse:
+          type: string
+          maxLength: 255
+        code_postal:
+          type: string
+          maxLength: 10
+        ville:
+          type: string
+          maxLength: 255
+        confirmation_candidat:
+          type: string
+          minLength: 1
+          maxLength: 1
+        pays_origine:
+          type: string
+          maxLength: 5
+        universite_origine:
+          type: string
+          maxLength: 6
+        selection_no_ordre:
+          type: integer
+        date_reponse_candidat:
+          type: string
+          format: date
+      required:
+        - no_candidat
+        - code_formation
+        - annee_universitaire
+        - nom
+        - prenom
+        - sexe
+        - lieu_naissance
+        - nationalite
+        - date_naissance
+        - email
+        - adresse
+        - ville
+        - pays_origine
+        - universite_origine
+    gCandidat:
+      title: gCandidat
+      type: object
+      x-examples: {}
+      x-stoplight:
+        id: 06002ec0f750806002ec0f7508
+      properties:
+        no_candidat:
+          type: string
+          maxLength: 50
+        code_formation:
+          type: string
+          maxLength: 8
+        annee_universitaire:
+          type: string
+          pattern: '^(?:\d{4})-(?:\d{4})$'
+          maxLength: 10
+        confirmation_candidat:
+          type: string
+          minLength: 1
+          maxLength: 1
+        nom:
+          type: string
+          maxLength: 50
+        prenom:
+          type: string
+          maxLength: 50
+        sexe:
+          type: string
+          maxLength: 1
+        date_naissance:
+          type: string
+          format: date
+        mobile:
+          type: string
+          maxLength: 20
+        email:
+          type: string
+          maxLength: 255
+        liste_selection:
+          type: string
+          maxLength: 6
+        universite_origine:
+          type: string
+          maxLength: 6
+        selection_no_ordre:
+          type: number
+        date_reponse_candidat:
+          type: string
+          format: date
+      required:
+        - no_candidat
+        - code_formation
+        - annee_universitaire
+        - nom
+        - prenom
+        - sexe
+        - date_naissance
+        - email
+        - universite_origine
+    oCandidat:
+      title: oCandidat
+      x-stoplight:
+        id: 10b1jdvr1bvt7
+      oneOf:
+        - $ref: '#/components/schemas/pCandidat'
+        - $ref: '#/components/schemas/gCandidat'
+    listCandidats:
+      title: listCandidats
+      x-stoplight:
+        id: 038diki0l0y37
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/oCandidat'
+    xPromotion:
+      title: xPromotion
+      x-stoplight:
+        id: rlfx4apdqa94j
+      type: object
+      x-examples:
+        Example 1:
+          code_formation: M2DOSI
+          annee_universitaire: 2023-2024
+          no_enseignant: 1
+          sigle_promotion: DOSI4
+          nb_max_etudiant: 0
+          date_reponse_lp: '2023-08-24'
+          date_reponse_lalp: '2023-08-24'
+          date_rentree: '2023-08-24'
+          lieu_rentree: LC117A
+          processus_stage: RECH
+          commentaire: rien
+      properties:
+        code_formation:
+          type: string
+          maxLength: 8
+        annee_universitaire:
+          type: string
+          maxLength: 10
+          pattern: '^(?:\d{4})-(?:\d{4})$'
+        sigle_promotion:
+          type: string
+          maxLength: 16
+        nb_max_etudiant:
+          type: integer
+        date_reponse_lp:
+          type: string
+          format: date
+        date_reponse_lalp:
+          type: string
+          format: date
+        date_rentree:
+          type: string
+          format: date
+        lieu_rentree:
+          type: string
+          maxLength: 12
+          default: LC117A
+        processus_stage:
+          type: string
+          maxLength: 5
+          default: RECH
+        commentaire:
+          type: string
+          maxLength: 255
+        no_enseignant:
+          type: integer
+          x-stoplight:
+            id: 87yb05m8jkce1
+        enseignant_info:
+          $ref: '#/components/schemas/gEnseignant'
+          x-stoplight:
+            id: v1i8u9frj8byx
+        total_etudiants:
+          type: integer
+          x-stoplight:
+            id: twybdoa0bms53
+      required:
+        - code_formation
+        - annee_universitaire
+        - nb_max_etudiant
+        - no_enseignant
+    xElementConstitutif:
+      title: XElementConstitutif
+      x-stoplight:
+        id: e940f292b76e9
+      type: object
+      properties:
+        code_formation:
+          type: string
+          minLength: 1
+          maxLength: 8
+        code_ue:
+          type: string
+          minLength: 1
+          maxLength: 8
+        code_ec:
+          type: string
+          minLength: 1
+          maxLength: 8
+        designation:
+          type: string
+          minLength: 1
+          maxLength: 64
+        description:
+          type: string
+          minLength: 1
+          maxLength: 240
+        nbh_cm:
+          type: integer
+          minimum: 1
+          maximum: 100
+          exclusiveMaximum: true
+        nbh_td:
+          type: integer
+        nbh_tp:
+          type: integer
+          minimum: 0
+        no_enseignant:
+          type: integer
+        enseignant_info:
+          $ref: '#/components/schemas/gEnseignant'
+          x-stoplight:
+            id: h90m5qlfgjotm
+      required:
+        - no_enseignant
+    xUniteEnseignement:
+      title: xUniteEnseignement
+      x-stoplight:
+        id: 5u2j0pzve03hu
+      type: object
+      properties:
+        code_formation:
+          type: string
+          minLength: 1
+          maxLength: 8
+        code_ue:
+          type: string
+          minLength: 1
+          maxLength: 8
+        designation:
+          type: string
+          minLength: 1
+          maxLength: 64
+        semestre:
+          type: string
+          minLength: 1
+          maxLength: 3
+        description:
+          type: string
+          minLength: 0
+          maxLength: 256
+        nbh_cm:
+          type: integer
+          minimum: 0
+        nbh_tp:
+          type: integer
+          minimum: 0
+          maximum: 100
+          exclusiveMaximum: true
+        nbh_td:
+          type: integer
+          minimum: 0
+          maximum: 100
+          exclusiveMaximum: true
+        no_enseignant:
+          type: integer
+        enseignant_info:
+          $ref: '#/components/schemas/gEnseignant'
+          x-stoplight:
+            id: 4b36tv4wrkare
+      required:
+        - no_enseignant
+    xFormation:
+      title: xFormation
+      x-stoplight:
+        id: 52947f92086ce
+      type: object
+      properties:
+        code_formation:
+          type: string
+          minLength: 1
+          maxLength: 8
+        diplome:
+          type: string
+          minLength: 1
+          maxLength: 3
+        no_annee:
+          type: integer
+          minimum: 1
+          maximum: 3
+        nom_formation:
+          type: string
+          minLength: 1
+          maxLength: 80
+        double_diplome:
+          type: string
+          minLength: 1
+          maxLength: 1
+        debut_accreditation:
+          type: string
+          format: date
+        fin_accreditation:
+          type: string
+          format: date
+    notOkayMessage:
+      title: notOkayMessage
+      x-stoplight:
+        id: ikmfsvb46y3vl
+      type: object
+      properties:
+        message:
+          type: string
+      description: Le message d'une réponse négatif ou fault.
+    xLogin:
+      title: xLogin
+      x-stoplight:
+        id: bd83f2414d03f
+      type: object
+      properties:
+        utilisateur:
+          type: string
+          minLength: 1
+        mot_de_passe:
+          type: string
+          minLength: 1
+      required:
+        - utilisateur
+        - mot_de_passe
+      description: ''
+      x-examples:
+        ADM:
+          utilisateur: Administrateur
+          mot_de_passe: dosi
+        ENS:
+          utilisateur: philippe.saliou@univ-brest.fr
+          mot_de_passe: dosi
+    tokenMessage:
+      title: tokenMessage
+      x-stoplight:
+        id: 2tv3zklhn0joq
+      type: object
+      properties:
+        token:
+          type: string
+          minLength: 1
+      description: ''
+    listPromotions:
+      title: listPromotions
+      x-stoplight:
+        id: r93unw9wfqcfz
+      type: object
+      properties:
+        total:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/xPromotion'
+    domainValue:
+      title: domainValue
+      x-stoplight:
+        id: fzcc7e8hyt88g
+      type: object
+      properties:
+        valeur:
+          type: string
+          x-stoplight:
+            id: 7zer1v4zw3sii
+        désignation:
+          type: string
+          x-stoplight:
+            id: umn7opi5dcfnc
+      required:
+        - valeur
+        - désignation
+      description: ''
+    sDomain:
+      title: sDomain
+      x-stoplight:
+        id: 7cni4efrxtzwe
+      type: object
+      properties:
+        domain_name:
+          type: string
+          x-stoplight:
+            id: g77s550asl70w
+        values:
+          type: array
+          x-stoplight:
+            id: cbdyj5yyh3kxw
+          items:
+            $ref: '#/components/schemas/domainValue'
+            x-stoplight:
+              id: d4i653oizpc7g
+      required:
+        - domain_name
+    domainList:
+      title: domainList
+      x-stoplight:
+        id: 0duzo96p84fge
+      type: array
+      items:
+        $ref: '#/components/schemas/sDomain'
+        x-stoplight:
+          id: wzb2q5zki836w
+    listFormations:
+      title: listFormations
+      x-stoplight:
+        id: vq3s022ie3uwd
+      type: object
+      properties:
+        total:
+          type: integer
+          x-stoplight:
+            id: 9j08ydudin8dr
+        data:
+          x-stoplight:
+            id: fah9l1tmrp2oo
+          type: array
+          items:
+            $ref: '#/components/schemas/xFormation'
+            x-stoplight:
+              id: eirct8bqdf662
+      description: La liste des formations.
+    listECs:
+      title: listECs
+      x-stoplight:
+        id: zpmon98r667ka
+      type: object
+      properties:
+        total:
+          type: integer
+          x-stoplight:
+            id: 9fe7rcb12o2m4
+        data:
+          type: array
+          x-stoplight:
+            id: l54kljqci997p
+          items:
+            $ref: '#/components/schemas/xElementConstitutif'
+            x-stoplight:
+              id: v7qvb8oqr4mrx
+      description: La liste des ECs
+    listUEs:
+      title: listUEs
+      x-stoplight:
+        id: pc7ewg15ycx44
+      type: object
+      description: La liste des UEs
+      properties:
+        total:
+          type: integer
+          x-stoplight:
+            id: kuchljo5qxrej
+        data:
+          type: array
+          x-stoplight:
+            id: mkey3cnfgwxk9
+          items:
+            $ref: '#/components/schemas/xUniteEnseignement'
+            x-stoplight:
+              id: xklyf58m0q7xf
+    gNoEnseignant:
+      title: gNoEnseignant
+      x-stoplight:
+        id: 6q9it3oqcje34
+      type: integer
+      description: Le numéro d'un enseignant
+  responses:
+    getEnseignants200Response:
+      description: 'Cette réponse contient une liste des enseignants (privéé oupublique), ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listEnseignants'
+          examples:
+            Liste privé:
+              value:
+                total: 1
+                data:
+                  - no_enseignant: 1
+                    type: MCF
+                    sexe: H
+                    nom: SALIOU
+                    prenom: Philippe
+                    adresse: Addresse 1
+                    code_postal: '29200'
+                    ville: Brest
+                    pays: France
+                    mobile: 06.01.02.03.04
+                    telephone: 06.04.03.02.01
+                    email_ubo: ubo@mail.com
+                    email_perso: perso@mail.com
+            Liste publique:
+              value:
+                total: 1
+                data:
+                  - no_enseignant: 1
+                    nom: SALIOU
+                    prenom: Philippe
+                    email_ubo: ubo@mail.com
+    get200CandidatsResponse:
+      description: 'La réponse contient une liste des candidats, ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listCandidats'
+    getEtudiants200tReponse:
+      description: 'La réponse contient une liste des etudiants, ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listEtudiants'
+    notOkay401Response:
+      description: Cette réponse est retournée lors d'une opération non-autorisée.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Une opération non-autorisée:
+              value:
+                message: Vous n'êtes pas autorisé à effectuer cette opération.
+    notOkay403Response:
+      description: Cette réponse est retournée lors d'un accès refusé.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Un accès refusé:
+              value:
+                message: Vous n'êtes pas autorisé à accèder à cette ressource.
+    notOkay404Response:
+      description: Cette réponse est retournée lors d'une réponse introuvable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Une réponse introuvable:
+              value:
+                message: La resource est introuvable.
+    notOkay500Response:
+      description: Cette réponse est retournée lors d'une erreur interne.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Une erreur interne:
+              value:
+                message: Une erreur est survenue. Veuillez contacter votre administrateur système.
+    notOkay400Response:
+      description: Cette réponse est retournée lors d'une demande mal-formée.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Une mauvaise demande:
+              value:
+                message: Votre demande est mal-formée.
+    hasToken200Response:
+      description: Cette réponse est retournée lors d'une authentification réussite.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tokenMessage'
+          examples:
+            Token:
+              value:
+                token: '[VOTRE_BEARER_TOKEN]'
+    hasLoggedOutResponse:
+      description: Cette réponse est retournée après une déconnexion réussite.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notOkayMessage'
+          examples:
+            Déconnexion réussite:
+              value:
+                message: La déconnexion est réussite.
+    getEnseignant200Response:
+      description: Cette réponse est retournée lors d'une recherche réussite d'un enseignant (privé / public).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/oEnseignant'
+          examples:
+            Enseignant privé:
+              value:
+                no_enseignant: 0
+                nom: SALIOU
+                prenom: Philippe
+                email_ubo: ubo@mail.com
+            Enseignant public:
+              value:
+                no_enseignant: 1
+                type: MCF
+                sexe: H
+                nom: SALIOU
+                prenom: Philippe
+                adresse: Addresse 1
+                code_postal: '29200'
+                ville: Brest
+                pays: France
+                mobile: 06.01.02.03.04
+                telephone: 06.04.03.02.01
+                email_ubo: ubo@mail.com
+                email_perso: perso@mail.com
+    get200PromotionsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listPromotions'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/listPromotions'
+    get200FormationsResponse:
+      description: 'La réponse contient une liste des formations, ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listFormations'
+    get200UEsResponse:
+      description: 'La réponse contient une liste des UEs, ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listUEs'
+    get200ECsResponse:
+      description: 'La réponse contient une liste des ECs, ainsi que le nombre total.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listECs'
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
+      description: ''
+  parameters:
+    page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: l'indice de page
+    size:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+      description: le nombre des éléments par page
+    code_formation:
+      name: code_formation
+      in: path
+      required: true
+      schema:
+        type: string
+      description: le code de formation
+    annee_universitaire:
+      name: annee_universitaire
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^\d{4}-\d{4}$'
+      description: l'année universitaire
+    code_ue:
+      name: code_ue
+      in: path
+      required: true
+      schema:
+        type: string
+      description: le code de l'unité d'enseignement
+    code_ec:
+      name: code_ec
+      in: path
+      required: true
+      schema:
+        type: string
+      description: le code de l'élément constitutif
+    no_enseignant:
+      name: no_enseignant
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: le numéro d'enseignant
+    no_candidat:
+      name: no_candidat
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Le numéro du candidat
+    no_etudiant:
+      name: no_etudiant
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Le numéro d'un étudiant
+    name:
+      name: name
+      in: query
+      required: false
+      schema:
+        type: string
+      description: le nom de domaine recherché
+    formation:
+      name: formation
+      in: query
+      required: false
+      schema:
+        type: string
+      description: filtrer par formation
+    ue:
+      name: ue
+      in: query
+      required: false
+      schema:
+        type: string
+      description: filtrer par ue
+    anne_univ:
+      name: anne_univ
+      in: query
+      required: false
+      schema:
+        type: string
+      description: filtrer par annee univ
+security:
+  - token: []
